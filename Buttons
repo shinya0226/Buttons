@@ -1,0 +1,25 @@
+package com.example.practice
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener{
+            val first_name = et1.text.toString()
+            val last_name = et2.text.toString()
+            val birth_date = et3.text.toString()
+            val country = et4.text.toString()
+            Log.d("Main Activity", "$first_name $last_name, born on $birth_date, from $country just applied to formula.")
+
+
+        }
+
+
+    }
+}
