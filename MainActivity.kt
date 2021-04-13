@@ -1,8 +1,8 @@
-package com.example.bottomnavigation
+package com.example.swipableviews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,31 +10,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val images = listOf(
+            R.drawable.ic_launcher_background,
+            R.drawable.ic_launcher_foreground
+        )
 
-        val firstFragment = FirstFragment()
-        val secondFragment = SecondFragment()
-        val thirdFragment = ThirdFragment()
-
-        setCurrentFragment(firstFragment)
-
-        bottomNavigationView.setOnNavigationItemSelectedListener{
-            when (it.itemId) {
-                R.id.miHome -> setCurrentFragment(firstFragment)
-                R.id.miMessage -> setCurrentFragment(secondFragment)
-                R.id.miProfile -> setCurrentFragment(thirdFragment)
-            }
-            true
-        }
-
-        bottomNavigationView.getOrCreateBadge(R.id.miMessage).apply {
-            number = 10
-            isVisible = true
-        }
-    }
+        val adapter = ViewPagerAdapter(images)
+        viewPager.adapter = adapter
+        viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        viewPager.beginFakeDrag()
+        viewPager.fakeDragBy(-10f)
+        viewPager.endFakeDrag()
+        
 
 
-    private fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply {
-         replace(R.id.flFragment, fragment)
-         commit()
+
+
     }
 }
